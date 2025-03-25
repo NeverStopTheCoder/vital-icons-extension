@@ -230,6 +230,7 @@ emptyImage = img`
         for (let i = 0; i < elements; i++) {
             let sprite = sprites.create(fullImage, SpriteKind.Player);
             sprite.setFlag(SpriteFlag.RelativeToCamera, true);
+            sprite.setFlag(SpriteFlag.GhostThroughWalls,true)
             sprite.x = 10 + i * 10;
             sprite.y = 10;
             statusBar.push(sprite);
