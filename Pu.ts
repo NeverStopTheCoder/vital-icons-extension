@@ -304,6 +304,7 @@ emptyImage = img`
         game.onUpdate(function () {
             for (let i = 0; i < statusBar.length; i++) {
                 let sprite = statusBar[i];
+                sprite.setFlag(SpriteFlag.RelativeToCamera,false)
                 sprite.x = mySprite.x - 20 + (i * 10); // Space them out horizontally
                 sprite.y = mySprite.y - 25;
             }
