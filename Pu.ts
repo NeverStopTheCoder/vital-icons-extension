@@ -297,15 +297,20 @@ emptyImage = img`
         }
         return filledCount;
     }
-    //% block="attach $statusBar to $mySprite"
+    //% block="attach $statusBar to $mySprite || with offseting $n"
     //% mySprite.shadow=variables_get
     //% statusBar.shadow=variables_get
-    export function attach(mySprite: Sprite, statusBar: Sprite[]) {
+    export function attach(mySprite: Sprite, statusBar: Sprite[],n?: number) {
         game.onUpdate(function () {
             for (let i = 0; i < statusBar.length; i++) {
                 let sprite = statusBar[i];
+                if (n) {
+                    sprite.x = mySprite.x - 20 + (i * 10)
+                    sprite.y = mySprite.y - 25 + 5 + n
+                } else {
                 sprite.x = mySprite.x - 20 + (i * 10); // Space them out horizontally
                 sprite.y = mySprite.y - 25;
+                }
             }
         });
     }
