@@ -230,7 +230,6 @@ emptyImage = img`
         for (let i = 0; i < elements; i++) {
             let sprite = sprites.create(fullImage, SpriteKind.Player);
             sprite.setFlag(SpriteFlag.RelativeToCamera, true);
-            sprite.setFlag(SpriteFlag.GhostThroughWalls,true)
             sprite.x = 10 + i * 10;
             sprite.y = 10;
             statusBar.push(sprite);
@@ -305,7 +304,6 @@ emptyImage = img`
         game.onUpdate(function () {
             for (let i = 0; i < statusBar.length; i++) {
                 let sprite = statusBar[i];
-                sprite.setFlag(SpriteFlag.RelativeToCamera,false)
                 sprite.x = mySprite.x - 20 + (i * 10); // Space them out horizontally
                 sprite.y = mySprite.y - 25;
             }
