@@ -16,23 +16,29 @@ namespace VitalIcons {
     }
     export enum VitalIconState {
         Full,
-        Empty
+        Empty,
+        Half
         }
-
+    export enum INPUT {
+        FULL,
+        HALF
+    }
     let vitalicons: Sprite[][] = [];
     let statusBarFullImages: Image[] = [];
     let statusBarEmptyImages: Image[] = [];
-    //% block="create $type status bar with $elements elements || and custom filled $filled and custom empty $empty"
+    let statusBarHalfImages: Image[] = [];
+    //% block="create $type status bar with $elements elements || and custom filled $filled and custom empty $empty and custom half $half"
     //% blockSetVariable=VitalIcon
     //%filled.shadow=screen_image_picker
     //%empty.shadow=screen_image_picker
-    export function createStatusBar(type: VitalType, elements: number, filled?: Image, empty?: Image): Sprite[] {
+    //%half.shadow=screen_image_picker
+    export function createStatusBar(type: VitalType, elements: number, filled?: Image, empty?: Image, half?: Image): Sprite[] {
         let statusBar: Sprite[] = [];
 
         // Define images based on type
     let fullImage: Image
     let emptyImage: Image
-
+    let halfImage: Image
         if (type == VitalType.Hearts) {
             fullImage = img`
                 . c 2 2 . 2 2 .
@@ -51,6 +57,15 @@ namespace VitalIcons {
                 . . 1 . . . 1 .
                 . . . 1 . 1 . .
                 . . . . 1 . . .
+            `;
+            halfImage = img`
+                . c 2 2 . . . .
+                c 2 2 2 . . . .
+                c 2 2 2 . . . .
+                c 2 2 2 . . . .
+                . c 2 2 . . . .
+                . . c 2 . . . .
+                . . . c . . . .
             `;
         } else if (type == VitalType.Food) {
             fullImage = img`
@@ -77,6 +92,18 @@ namespace VitalIcons {
                 . . . . . . . 1 . 1
                 . . . . . . . 1 1 .
             `;
+            halfImage = img`
+                . . . . . . . . . .
+                . . . . . . . . . .
+                . . . . . 2 . . . .
+                . . . . 2 e f . . .
+                . . . 2 e e e f . .
+                . . 2 e e e e f . .
+                . . . f e e e f . .
+                . . . . f f f 1 f f
+                . . . . . . . f 1 f
+                . . . . . . . f f .
+            `;
         } else if (type == VitalType.Water) {
             fullImage = img`
                 . . . . . . . . . .
@@ -100,6 +127,18 @@ namespace VitalIcons {
                 . f . . . . . f . .
                 . f . . . . . f . .
                 . . f . . . f . . .
+                . . . f f f . . . .
+            `;
+            halfImage = img`
+                . . . . . . . . . .
+                . . . . . . . . . .
+                . . . . . . . . . .
+                . . . . . . . . . .
+                . . . . . . . . . .
+                . f 6 9 6 6 6 f . .
+                . f 6 6 9 6 6 f . .
+                . f 6 6 9 6 6 f . .
+                . . f 6 6 6 f . . .
                 . . . f f f . . . .
             `;
         } else if (type == VitalType.Energy) {
@@ -128,6 +167,18 @@ namespace VitalIcons {
                 . f . f . .
                 f . f . . .
             `;
+            halfImage = img`
+                . . . . . .
+                . . . . . .
+                . . . . . .
+                . . . . . .
+                . . . . . .
+                f 5 5 5 f .
+                . f f f 5 f
+                . . f 5 f .
+                . f 5 f . .
+                f 5 f . . .
+            `;
         } else if (type == VitalType.Gas)  {
             fullImage = img`
                 2 2 2 2 2 . . . . .
@@ -153,6 +204,18 @@ namespace VitalIcons {
                 1 . . . . . . . 1 .
                 1 1 1 1 1 1 1 1 1 .
             `;
+            halfImage = img`
+                2 2 2 2 2 . . . . .
+                2 . . . 2 . . . . .
+                f f f 2 2 . . . . .
+                f f 2 2 2 . . . . .
+                f 2 f 2 2 . . . . .
+                2 2 2 f f . . . . .
+                2 2 2 f f . . . . .
+                2 2 f 2 2 . . . . .
+                2 f 2 2 2 . . . . .
+                2 2 2 2 2 . . . . .
+            `;
         } else if (type == VitalType.Oxygen){
              fullImage = img`
                  . . . f f f . . .
@@ -176,6 +239,17 @@ namespace VitalIcons {
                  . . . . . . . . .
                  . . . . . . . . .
              `;
+            halfImage = img`
+                . . . f . . . . .
+                . . f 6 . . . . .
+                . f 6 8 . . . . .
+                f 6 8 1 . . . . .
+                f 6 8 1 . . . . .
+                f 6 8 8 . . . . .
+                . f 6 8 . . . . .
+                . . f 6 . . . . .
+                . . . f . . . . .
+            `;
         } else if (type == VitalType.Armor){
             fullImage = img`
                 . f f . . . f f .
@@ -201,6 +275,18 @@ namespace VitalIcons {
     . f c c c c c f .
     . . f f f f f . .
             `;
+            halfImage = img`
+                . f f . . . f f .
+                f 1 b f . f 1 b f
+                f b b b f b b b f
+                f c b b b b b c f
+                . f b b b b b f .
+                . f b b b b b f .
+                . . . . . . . . .
+                . . . . . . . . .
+                . . . . . . . . .
+                . . . . . . . . .
+            `;
         }else {
            fullImage = img`
                5 5 5 5 5 5 5 5
@@ -220,12 +306,24 @@ emptyImage = img`
     5 3 5 f f 5 7 5
     7 5 5 5 5 6 5 5
 `;
+            halfImage = img`
+                5 5 5 5 5 5 5 5
+                5 5 5 f f 5 5 5
+                5 5 5 f f 5 5 5
+                5 5 5 f f 5 5 5
+                . . . . . . . .
+                . . . . . . . .
+                . . . . . . . .
+            `;
         }
         if (filled) {
             fullImage = filled
         }
         if (empty) {
             emptyImage = empty
+        }
+        if (half) {
+            halfImage = half
         }
         for (let i = 0; i < elements; i++) {
             let sprite = sprites.create(fullImage, SpriteKind.Player);
@@ -239,6 +337,7 @@ emptyImage = img`
         vitalicons.push(statusBar);
         statusBarFullImages.push(fullImage);
         statusBarEmptyImages.push(emptyImage);
+        statusBarHalfImages.push(halfImage);
 
         return statusBar;
     }
@@ -251,32 +350,80 @@ emptyImage = img`
             sprite.y = y;
         }
     }
-    //% block="change $statusBar by $value"
+    //% block="change $statusBar by $value change by $check"
     //% statusBar.shadow=variables_get
-    //% value.min=-10 value.max=10
-    export function changeStatusBar2(statusBar: Sprite[], value: number) {
+    export function changeStatusBar2(statusBar: Sprite[], value: number, check: INPUT) {
         let index = vitalicons.indexOf(statusBar);
         if (index == -1) return;
 
         let fullImage = statusBarFullImages[index];
         let emptyImage = statusBarEmptyImages[index];
+        let halfImage = statusBarHalfImages[index];
+        if (check == 1) {
+            // Count how many hearts are currently full or half-full
+            let filledCount = 0;
+            let hasHalfHeart = false;
 
-        // Count how many hearts are currently full
-        let filledCount = 0;
-        for (let i = 0; i < statusBar.length; i++) {
-            if (statusBar[i].image.equals(fullImage)) {
-                filledCount++;
+            for (let i = 0; i < statusBar.length; i++) {
+                if (statusBar[i].image.equals(fullImage)) {
+                    filledCount++;
+                } else if (statusBar[i].image.equals(halfImage)) {
+                    hasHalfHeart = true;
+                }
             }
-        }
 
-        // Apply change
-        let newCount = Math.clamp(0, statusBar.length, filledCount + value);
+            // Calculate the total "health units" (full hearts count as 2, half hearts count as 1)
+            let currentHealth = filledCount * 2 + (hasHalfHeart ? 1 : 0);
+            let newHealth = Math.clamp(0, statusBar.length * 2, currentHealth + value);
 
-        for (let i = 0; i < statusBar.length; i++) {
-            if (i < newCount) {
-                statusBar[i].setImage(fullImage);
-            } else {
-                statusBar[i].setImage(emptyImage);
+            // Update the status bar based on the new health
+            for (let i = 0; i < statusBar.length; i++) {
+                if (newHealth >= 2) {
+                    // Full heart
+                    statusBar[i].setImage(fullImage);
+                    newHealth -= 2;
+                } else if (newHealth === 1) {
+                    // Half heart
+                    statusBar[i].setImage(halfImage);
+                    newHealth -= 1;
+                } else {
+                    // Empty heart
+                    statusBar[i].setImage(emptyImage);
+                }
+            }
+        } else if (check == 0) {
+            for (let index = 0; index < 2; index++) {
+                // Count how many hearts are currently full or half-full
+                let filledCount = 0;
+                let hasHalfHeart = false;
+
+                for (let i = 0; i < statusBar.length; i++) {
+                    if (statusBar[i].image.equals(fullImage)) {
+                        filledCount++;
+                    } else if (statusBar[i].image.equals(halfImage)) {
+                        hasHalfHeart = true;
+                    }
+                }
+
+                // Calculate the total "health units" (full hearts count as 2, half hearts count as 1)
+                let currentHealth = filledCount * 2 + (hasHalfHeart ? 1 : 0);
+                let newHealth = Math.clamp(0, statusBar.length * 2, currentHealth + value);
+
+                // Update the status bar based on the new health
+                for (let i = 0; i < statusBar.length; i++) {
+                    if (newHealth >= 2) {
+                        // Full heart
+                        statusBar[i].setImage(fullImage);
+                        newHealth -= 2;
+                    } else if (newHealth === 1) {
+                        // Half heart
+                        statusBar[i].setImage(halfImage);
+                        newHealth -= 1;
+                    } else {
+                        // Empty heart
+                        statusBar[i].setImage(emptyImage);
+                    }
+                }
             }
         }
     }
@@ -287,15 +434,18 @@ emptyImage = img`
         if (index == -1) return 0;
 
         let fullImage = statusBarFullImages[index];
-        let filledCount = 0;
+        let halfImage = statusBarHalfImages[index];
+        let healthValue = 0;
 
-        // Count the number of full images remaining
+        // Calculate health value based on full and half images
         for (let sprite of vitalIcon) {
             if (sprite.image.equals(fullImage)) {
-                filledCount++;
+                healthValue += 1; // Full heart adds 1
+            } else if (sprite.image.equals(halfImage)) {
+                healthValue += 0.5; // Half heart adds 0.5
             }
         }
-        return filledCount;
+        return healthValue;
     }
     //% block="attach $statusBar to $mySprite || with offseting $n"
     //% mySprite.shadow=variables_get
@@ -345,12 +495,15 @@ emptyImage = img`
 
         let fullImage = statusBarFullImages[index];
         let emptyImage = statusBarEmptyImages[index];
+        let halfImage = statusBarHalfImages[index];
 
         for (let sprite of vitalIcon) {
             if (state == VitalIconState.Full) {
                 sprite.setImage(fullImage);
-            } else {
+            } else if (state == VitalIconState.Empty) {
                 sprite.setImage(emptyImage);
+            } else {
+                sprite.setImage(halfImage)
             }
         }
     }
@@ -367,8 +520,10 @@ emptyImage = img`
         // Update stored image reference
         if (state == VitalIconState.Full) {
             statusBarFullImages[index] = image;
-        } else {
+        } else if (state == VitalIconState.Empty) {
             statusBarEmptyImages[index] = image;
+        }else {
+            statusBarHalfImages[index] = image;
         }
 
         // Loop through and apply the new image only to existing icons
