@@ -447,10 +447,10 @@ emptyImage = img`
         }
         return healthValue;
     }
-    //% block="attach $statusBar to $mySprite || with offseting $n"
+    //% block="attach $statusBar to $mySprite || with y offseting $n and x offseting $n2"
     //% mySprite.shadow=variables_get
     //% statusBar.shadow=variables_get
-    export function attach(mySprite: Sprite, statusBar: Sprite[],n?: number) {
+    export function attach(mySprite: Sprite, statusBar: Sprite[],n?: number,n2?: number) {
         game.onUpdate(function () {
             for (let i = 0; i < statusBar.length; i++) {
                 let sprite = statusBar[i];
@@ -460,6 +460,9 @@ emptyImage = img`
                 } else {
                 sprite.x = mySprite.x - 20 + (i * 10); // Space them out horizontally
                 sprite.y = mySprite.y - 25;
+                }
+                if (n2) {
+                    sprite.x = mySprite.x - 20 + (i * 10) + n2
                 }
             }
         });
