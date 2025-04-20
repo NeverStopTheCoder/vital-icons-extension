@@ -535,4 +535,11 @@ emptyImage = img`
             }
         }
     }
+    //%block
+    //%statusbar.shadow=variables_get
+    export function destroy(statusbar: Sprite[]): void {
+for (let sprite of statusbar) {
+sprites.destroy(sprite)
+}
+}
 }
