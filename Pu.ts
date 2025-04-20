@@ -326,7 +326,7 @@ emptyImage = img`
             halfImage = half
         }
         for (let i = 0; i < elements; i++) {
-            let sprite = sprites.create(fullImage, SpriteKind.Player);
+            let sprite = sprites.create(fullImage, SpriteKind.VitalIcon);
             sprite.setFlag(SpriteFlag.RelativeToCamera, true);
             sprite.x = 10 + i * 10;
             sprite.y = 10;
@@ -549,4 +549,7 @@ for (let sprite of statusbar) {
 sprites.destroy(sprite)
 }
 }
+}
+namespace SpriteKind {
+    export const VitalIcon = SpriteKind.create()
 }
