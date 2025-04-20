@@ -453,16 +453,20 @@ emptyImage = img`
     export function attach(mySprite: Sprite, statusBar: Sprite[],n?: number,n2?: number) {
         game.onUpdate(function () {
             for (let i = 0; i < statusBar.length; i++) {
-                let sprite = statusBar[i];
+                let sprite = statusBar[i]; 
+                sprite.setFlag(SpriteFlag.RelativeToCamera,false)
                 if (n) {
                     sprite.x = mySprite.x - 20 + (i * 10)
                     sprite.y = mySprite.y - 25 + 5 + n
+                    
                 } else {
                 sprite.x = mySprite.x - 20 + (i * 10); // Space them out horizontally
                 sprite.y = mySprite.y - 25;
+                
                 }
                 if (n2) {
                     sprite.x = mySprite.x - 20 + (i * 10) + n2
+                    
                 }
             }
         });
