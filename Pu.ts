@@ -549,6 +549,28 @@ for (let sprite of statusbar) {
 sprites.destroy(sprite)
 }
 }
+//%lock="Set $vitalicon icon at $num to $image"
+//image.shadow=screen_image_picker
+//vitalicon.shadow=variables_get
+//export function changeimageatnumber(image: Image,num:number,vitalicon:Sprite[]): void {
+//let index = vitalicons.indexOf(vitalicon);
+//if (index == -1) return;
+
+//let currentValue = getStatusBarValue(vitalicon);
+
+   // for (let sprite of vitalicon) {
+     //   vitalicon[num].setImage(image)
+    //}
+    //Loop through and apply the new image only to existing icons 
+   // for(let i = 0; i < vitalicons[index].length; i++) {
+       // if (i < currentValue) {
+      //      vitalicons[index] [num].setImage(image);
+      //  }
+       // else {
+      //      vitalicons[index] [i].setImage(statusBarEmptyImages[index]);
+       // }
+//}
+//}
 }
 namespace SpriteKind {
     export const VitalIcon = SpriteKind.create()
