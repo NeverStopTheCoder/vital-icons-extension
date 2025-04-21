@@ -2,8 +2,7 @@
     "name": "Vital Icons Extension",
     "description": "",
     "dependencies": {
-        "device": "*",
-        "arcade-text": "github:microsoft/arcade-text#v1.3.0"
+        "device": "*"
     },
     "files": [
         "main.blocks",
