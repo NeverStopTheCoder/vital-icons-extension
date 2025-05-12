@@ -29,6 +29,7 @@ namespace VitalIcons {
     let statusBarHalfImages: Image[] = [];
     //% block="create $type status bar with $elements elements || and custom filled $filled and custom empty $empty and custom half $half"
     //% blockSetVariable=VitalIcon
+    //% help=github:vital-icons-extension/docs/create
     //%filled.shadow=screen_image_picker
     //%empty.shadow=screen_image_picker
     //%half.shadow=screen_image_picker
@@ -345,6 +346,7 @@ emptyImage = img`
 
     //% block="position $vitalicon at x $x y $y"
     //% vitalicon.shadow=variables_get
+    //% help=github:vital-icons-extension/docs/position-Status-Bar
     //%vitalicon.defl=vitalicon
     //%group="Position"
     export function positionStatusBar(vitalicon: Sprite[], x: number, y: number) {
@@ -355,9 +357,10 @@ emptyImage = img`
     }
     //% block="change $vitalicon by $value change by $check"
     //% vitalicon.shadow=variables_get
+    //% help=github:vital-icons-extension/docs/change-Status-Bar
     //%vitalicon.defl=vitalicon
     //%group="Value"
-    export function changeStatusBar2(vitalicon: Sprite[], value: number, check: INPUT) {
+    export function changeStatusBar(vitalicon: Sprite[], value: number, check: INPUT) {
         let index = vitalicons.indexOf(vitalicon);
         if (index == -1) return;
 
@@ -434,6 +437,7 @@ emptyImage = img`
     }
     //% block="get value of $vitalIcon"
     //% vitalIcon.shadow=variables_get
+    //% help=github:vital-icons-extension/docs/get-Status-Bar-Value
     //%vitalIcon.defl=vitalicon
     //%group="Value"
     export function getStatusBarValue(vitalIcon: Sprite[]): number {
@@ -457,6 +461,7 @@ emptyImage = img`
     //% block="attach $vitalicon to $mySprite || with y offseting $n and x offseting $n2"
     //% mySprite.shadow=variables_get
     //% vitalicon.shadow=variables_get
+    //% help=github:vital-icons-extension/docs/attach
     //%vitalicon.defl=vitalicon
     //%mySprite.defl=mySprite
     //%group="Attach"
@@ -485,6 +490,7 @@ emptyImage = img`
     }
     //% block="set $vitalIcon to $value"
     //% vitalIcon.shadow=variables_get
+    //% help=github:vital-icons-extension/docs/set-StatusB-Bar-Value
     //% value.min=0 value.max=10
     //%vitalIcon.defl=vitalicon
     //%group="Value"
@@ -509,6 +515,7 @@ emptyImage = img`
     }
     //% block="set $vitalIcon to $state"
     //% vitalIcon.shadow=variables_get
+    //% help=github:vital-icons-extension/docs/set-Vital-Icon
     //% state.defl=VitalIconState.Full
     //%vitalIcon.defl=vitalicon
     //%group="Value"
@@ -534,9 +541,10 @@ emptyImage = img`
     //% block="set $vitalIcon $state to $image"
     //% image.shadow=screen_image_picker
     //% vitalIcon.shadow=variables_get
+    //% help=github:vital-icons-extension/docs/set-Vital-Icon-Image
     //%vitalIcon.defl=vitalicon
     //%group="Modify"
-    export function setVitalIconImage2(vitalIcon: Sprite[], state: VitalIconState, image: Image) {
+    export function setVitalIconImage(vitalIcon: Sprite[], state: VitalIconState, image: Image) {
         let index = vitalicons.indexOf(vitalIcon);
         if (index == -1) return;
 
@@ -562,6 +570,7 @@ emptyImage = img`
     }
     //%block
     //%vitalicon.shadow=variables_get
+    //% help=github:vital-icons-extension/docs/destroy
     //%vitalicon.defl=vitalicon
     //%group="Destroy"
     export function destroy(vitalicon: Sprite[]): void {
@@ -573,6 +582,7 @@ sprites.destroy(sprite)
 
     //% block="set $vitalicon spacing to $n"
     //% vitalicon.shadow=variables_get
+    //% help=github:vital-icons-extension/docs/set-Vital-Icon-Spacing
     //%vitalicon.defl=vitalicon
     //%group="Spacing"
     export function setVitalIconSpacing(vitalicon: Sprite[], n: number): void {
@@ -587,6 +597,7 @@ sprites.destroy(sprite)
     }
     //%block="change $vitalicon spacing by $n"
     //%vitalicon.shadow=variables_get
+    //% help=github:vital-icons-extension/docs/change-Vital-Icon-Spacing
     //%vitalicon.defl=vitalicon
     //%group="Spacing"
     export function changeVitalIconSpacingBy(vitalicon: Sprite[], n:number): void {
@@ -602,6 +613,7 @@ sprites.destroy(sprite)
 }
     //% block="arrange $vitalicon in rows"
     //% vitalicon.shadow=variables_get
+    //% help=github:vital-icons-extension/docs/arrange-Vital-Icons
     //%vitalicon.defl=vitalicon
     //%group="Arrange"
     export function arrangeVitalIcons(vitalicon: Sprite[]): void {
