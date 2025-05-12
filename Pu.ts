@@ -32,6 +32,7 @@ namespace VitalIcons {
     //%filled.shadow=screen_image_picker
     //%empty.shadow=screen_image_picker
     //%half.shadow=screen_image_picker
+    //%group="Create"
     export function createStatusBar(type: VitalType, elements: number, filled?: Image, empty?: Image, half?: Image): Sprite[] {
         let statusBar: Sprite[] = [];
 
@@ -338,22 +339,26 @@ emptyImage = img`
         statusBarFullImages.push(fullImage);
         statusBarEmptyImages.push(emptyImage);
         statusBarHalfImages.push(halfImage);
-
+        
         return statusBar;
     }
 
-    //% block="position $statusBar at x $x y $y"
-    //% statusBar.shadow=variables_get
-    export function positionStatusBar(statusBar: Sprite[], x: number, y: number) {
-        for (let sprite of statusBar) {
+    //% block="position $vitalicon at x $x y $y"
+    //% vitalicon.shadow=variables_get
+    //%vitalicon.defl=vitalicon
+    //%group="Position"
+    export function positionStatusBar(vitalicon: Sprite[], x: number, y: number) {
+        for (let sprite of vitalicon) {
             sprite.x = x + (sprite.x - 10);
             sprite.y = y;
         }
     }
-    //% block="change $statusBar by $value change by $check"
-    //% statusBar.shadow=variables_get
-    export function changeStatusBar2(statusBar: Sprite[], value: number, check: INPUT) {
-        let index = vitalicons.indexOf(statusBar);
+    //% block="change $vitalicon by $value change by $check"
+    //% vitalicon.shadow=variables_get
+    //%vitalicon.defl=vitalicon
+    //%group="Value"
+    export function changeStatusBar2(vitalicon: Sprite[], value: number, check: INPUT) {
+        let index = vitalicons.indexOf(vitalicon);
         if (index == -1) return;
 
         let fullImage = statusBarFullImages[index];
@@ -364,31 +369,31 @@ emptyImage = img`
             let filledCount = 0;
             let hasHalfHeart = false;
 
-            for (let i = 0; i < statusBar.length; i++) {
-                if (statusBar[i].image.equals(fullImage)) {
+            for (let i = 0; i < vitalicon.length; i++) {
+                if (vitalicon[i].image.equals(fullImage)) {
                     filledCount++;
-                } else if (statusBar[i].image.equals(halfImage)) {
+                } else if (vitalicon[i].image.equals(halfImage)) {
                     hasHalfHeart = true;
                 }
             }
 
             // Calculate the total "health units" (full hearts count as 2, half hearts count as 1)
             let currentHealth = filledCount * 2 + (hasHalfHeart ? 1 : 0);
-            let newHealth = Math.clamp(0, statusBar.length * 2, currentHealth + value);
+            let newHealth = Math.clamp(0, vitalicon.length * 2, currentHealth + value);
 
             // Update the status bar based on the new health
-            for (let i = 0; i < statusBar.length; i++) {
+            for (let i = 0; i < vitalicon.length; i++) {
                 if (newHealth >= 2) {
                     // Full heart
-                    statusBar[i].setImage(fullImage);
+                    vitalicon[i].setImage(fullImage);
                     newHealth -= 2;
                 } else if (newHealth === 1) {
                     // Half heart
-                    statusBar[i].setImage(halfImage);
+                    vitalicon[i].setImage(halfImage);
                     newHealth -= 1;
                 } else {
                     // Empty heart
-                    statusBar[i].setImage(emptyImage);
+                    vitalicon[i].setImage(emptyImage);
                 }
             }
         } else if (check == 0) {
@@ -397,31 +402,31 @@ emptyImage = img`
                 let filledCount = 0;
                 let hasHalfHeart = false;
 
-                for (let i = 0; i < statusBar.length; i++) {
-                    if (statusBar[i].image.equals(fullImage)) {
+                for (let i = 0; i < vitalicon.length; i++) {
+                    if (vitalicon[i].image.equals(fullImage)) {
                         filledCount++;
-                    } else if (statusBar[i].image.equals(halfImage)) {
+                    } else if (vitalicon[i].image.equals(halfImage)) {
                         hasHalfHeart = true;
                     }
                 }
 
                 // Calculate the total "health units" (full hearts count as 2, half hearts count as 1)
                 let currentHealth = filledCount * 2 + (hasHalfHeart ? 1 : 0);
-                let newHealth = Math.clamp(0, statusBar.length * 2, currentHealth + value);
+                let newHealth = Math.clamp(0, vitalicon.length * 2, currentHealth + value);
 
                 // Update the status bar based on the new health
-                for (let i = 0; i < statusBar.length; i++) {
+                for (let i = 0; i < vitalicon.length; i++) {
                     if (newHealth >= 2) {
                         // Full heart
-                        statusBar[i].setImage(fullImage);
+                        vitalicon[i].setImage(fullImage);
                         newHealth -= 2;
                     } else if (newHealth === 1) {
                         // Half heart
-                        statusBar[i].setImage(halfImage);
+                        vitalicon[i].setImage(halfImage);
                         newHealth -= 1;
                     } else {
                         // Empty heart
-                        statusBar[i].setImage(emptyImage);
+                        vitalicon[i].setImage(emptyImage);
                     }
                 }
             }
@@ -429,6 +434,8 @@ emptyImage = img`
     }
     //% block="get value of $vitalIcon"
     //% vitalIcon.shadow=variables_get
+    //%vitalIcon.defl=vitalicon
+    //%group="Value"
     export function getStatusBarValue(vitalIcon: Sprite[]): number {
         let index = vitalicons.indexOf(vitalIcon);
         if (index == -1) return 0;
@@ -447,13 +454,18 @@ emptyImage = img`
         }
         return healthValue;
     }
-    //% block="attach $statusBar to $mySprite || with y offseting $n and x offseting $n2"
+    //% block="attach $vitalicon to $mySprite || with y offseting $n and x offseting $n2"
     //% mySprite.shadow=variables_get
-    //% statusBar.shadow=variables_get
-    export function attach(mySprite: Sprite, statusBar: Sprite[],n?: number,n2?: number) {
-        game.onUpdate(function () {
-            for (let i = 0; i < statusBar.length; i++) {
-                let sprite = statusBar[i]; 
+    //% vitalicon.shadow=variables_get
+    //%vitalicon.defl=vitalicon
+    //%mySprite.defl=mySprite
+    //%group="Attach"
+    export function attach(mySprite: Sprite, vitalicon: Sprite[],n?: number,n2?: number) {
+        
+            forever(function() {
+                
+            for (let i = 0; i < vitalicon.length; i++) {
+                let sprite = vitalicon[i]; 
                 sprite.setFlag(SpriteFlag.RelativeToCamera,false)
                 if (n) {
                     sprite.x = mySprite.x - 20 + (i * 10)
@@ -474,6 +486,8 @@ emptyImage = img`
     //% block="set $vitalIcon to $value"
     //% vitalIcon.shadow=variables_get
     //% value.min=0 value.max=10
+    //%vitalIcon.defl=vitalicon
+    //%group="Value"
     export function setStatusBarValue(vitalIcon: Sprite[], value: number) {
         let index = vitalicons.indexOf(vitalIcon);
         if (index == -1) return;
@@ -496,6 +510,8 @@ emptyImage = img`
     //% block="set $vitalIcon to $state"
     //% vitalIcon.shadow=variables_get
     //% state.defl=VitalIconState.Full
+    //%vitalIcon.defl=vitalicon
+    //%group="Value"
     export function setVitalIcon(vitalIcon: Sprite[], state: VitalIconState) {
         let index = vitalicons.indexOf(vitalIcon);
         if (index == -1) return;
@@ -518,6 +534,8 @@ emptyImage = img`
     //% block="set $vitalIcon $state to $image"
     //% image.shadow=screen_image_picker
     //% vitalIcon.shadow=variables_get
+    //%vitalIcon.defl=vitalicon
+    //%group="Modify"
     export function setVitalIconImage2(vitalIcon: Sprite[], state: VitalIconState, image: Image) {
         let index = vitalicons.indexOf(vitalIcon);
         if (index == -1) return;
@@ -543,13 +561,70 @@ emptyImage = img`
         }
     }
     //%block
-    //%statusbar.shadow=variables_get
-    export function destroy(statusbar: Sprite[]): void {
-for (let sprite of statusbar) {
+    //%vitalicon.shadow=variables_get
+    //%vitalicon.defl=vitalicon
+    //%group="Destroy"
+    export function destroy(vitalicon: Sprite[]): void {
+for (let sprite of vitalicon) {
 sprites.destroy(sprite)
 }
 }
+
+
+    //% block="set $vitalicon spacing to $n"
+    //% vitalicon.shadow=variables_get
+    //%vitalicon.defl=vitalicon
+    //%group="Spacing"
+    export function setVitalIconSpacing(vitalicon: Sprite[], n: number): void {
+        let index = vitalicons.indexOf(vitalicon)
+        if (index == -1) return;
+
+        // Now update positions of each icon
+        // Apply the new spacing to the existing icons
+       for (let i = 0; i < vitalicon.length; i++) {
+           vitalicon[i].x = 10 + i * n
+       }
+    }
+    //%block="change $vitalicon spacing by $n"
+    //%vitalicon.shadow=variables_get
+    //%vitalicon.defl=vitalicon
+    //%group="Spacing"
+    export function changeVitalIconSpacingBy(vitalicon: Sprite[], n:number): void {
+        let index = vitalicons.indexOf(vitalicon)
+        if (index == -1) return;
+
+        for (let i = 0; i < vitalicon.length; i++) {
+            vitalicon[i].x += 0 + i * n
+        }
+
+
+
 }
+    //% block="arrange $vitalicon in rows"
+    //% vitalicon.shadow=variables_get
+    //%vitalicon.defl=vitalicon
+    //%group="Arrange"
+    export function arrangeVitalIcons(vitalicon: Sprite[]): void {
+        if (vitalicon.length == 0) return
+game.onUpdate(function() {
+        let anchorX = vitalicon[0].x
+        let anchorY = vitalicon[0].y
+
+        for (let i = 0; i < vitalicon.length; i++) {
+            let row = Math.floor(i / 5)
+            let col = i % 5
+
+            let iconsInRow = (i + 5 > vitalicon.length) ? (vitalicon.length % 5) : 5
+            let rowOffset = (iconsInRow * 0) / 2
+
+            vitalicon[i].x = anchorX - rowOffset + col * 16
+            vitalicon[i].y = anchorY + row * 16
+        }
+})
+    }
+    
+        
+    }
 namespace SpriteKind {
     export const VitalIcon = SpriteKind.create()
 }
