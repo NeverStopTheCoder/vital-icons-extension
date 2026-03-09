@@ -29,6 +29,7 @@ namespace VitalIcons {
     let statusBarHalfImages: Image[] = [];
     //% block="create $type status bar with $elements elements || and custom filled $filled and custom empty $empty and custom half $half"
     //% blockSetVariable=VitalIcon
+    //% help=github:vital-icons-extension/docs/create
     //%filled.shadow=screen_image_picker
     //%empty.shadow=screen_image_picker
     //%half.shadow=screen_image_picker
@@ -485,6 +486,7 @@ emptyImage = img`
     }
     //% block="set $vitalIcon to $value"
     //% vitalIcon.shadow=variables_get
+    //% help=github:vital-icons-extension/docs/set-StatusB-Bar-Value
     //% value.min=0 value.max=10
     //%vitalIcon.defl=vitalicon
     //%group="Value"
@@ -509,6 +511,7 @@ emptyImage = img`
     }
     //% block="set $vitalIcon to $state"
     //% vitalIcon.shadow=variables_get
+    //% help=github:vital-icons-extension/docs/set-Vital-Icon
     //% state.defl=VitalIconState.Full
     //%vitalIcon.defl=vitalicon
     //%group="Value"

@@ -24,3 +24,16 @@ To edit this repository in MakeCode.
 
 * for PXT/arcade
 <script src="https://makecode.com/gh-pages-embed.js"></script><script>makeCodeRender("{{ site.makecode.home_url }}", "{{ site.github.owner_name }}/{{ site.github.repository_name }}");</script>
+
+#### Blocks 
+
+create block
+
+let VitalIcon = VitalIcons.createStatusBar(
+VitalIcons.VitalType.Hearts,
+5
+)
+
+change block
+
+VitalIcons.changeStatusBar(VitalIcon, -1, VitalIcons.INPUT.FULL)
