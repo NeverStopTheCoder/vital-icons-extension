@@ -636,7 +636,7 @@ game.onUpdate(function() {
     }
     
         
-    }
+    
 namespace SpriteKind {
     export const VitalIcon = SpriteKind.create()
 }
