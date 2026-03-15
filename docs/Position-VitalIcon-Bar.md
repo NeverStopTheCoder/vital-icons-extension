@@ -10,4 +10,6 @@ VitalIcons.positionStatusBar(VitalIcon, 0, 0)
 * **number**: the x position on screen
 * **number**: the y position on screen
   
-  ```package
+```package
+https://github.com/NeverStopTheCoder/vital-icons-extension
+```
