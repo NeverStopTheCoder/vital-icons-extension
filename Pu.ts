@@ -359,8 +359,7 @@ emptyImage = img`
     //% vitalicon.shadow=variables_get
     //%vitalicon.defl=vitalicon
     //%group="Value"
-    //%help=github:vital-icons-extension/docs/Change-value-of-VitalIcon-By-Number
-    export function changeStatusBar(vitalicon: Sprite[], value: number, check: INPUT) {
+    export function changeStatusBar2(vitalicon: Sprite[], value: number, check: INPUT) {
         let index = vitalicons.indexOf(vitalicon);
         if (index == -1) return;
 
@@ -543,8 +542,7 @@ emptyImage = img`
     //% vitalIcon.shadow=variables_get
     //%vitalIcon.defl=vitalicon
     //%group="Modify"
-    //%help=github:vital-icons-extension/docs/Set-VitalIcon-Enum-to-Image
-    export function setVitalIconImage(vitalIcon: Sprite[], state: VitalIconState, image: Image) {
+    export function setVitalIconImage2(vitalIcon: Sprite[], state: VitalIconState, image: Image) {
         let index = vitalicons.indexOf(vitalIcon);
         if (index == -1) return;
 
@@ -636,7 +634,9 @@ game.onUpdate(function() {
 }
     
     }
+    
         
+    }
 namespace SpriteKind {
     export const VitalIcon = SpriteKind.create()
 }
