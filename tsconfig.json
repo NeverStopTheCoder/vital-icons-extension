@@ -1,9 +1,7 @@
 {
-    "compilerOptions": {
-        "target": "ES5",
-        "noImplicitAny": true,
-        "outDir": "built",
-        "rootDir": "."
-    },
-    "exclude": ["pxt_modules/**/*test.ts"]
+     "packages": {
+            "NeverStopTheCoder/pxt-arcade-Vital-Icons": {
+                "preferred": true,
+                "tags": [ "Sprites" ]
+            },
 }
